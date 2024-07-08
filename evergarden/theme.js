@@ -1,4 +1,4 @@
-(async function catppuccin() {
+(async function load_colorscheme_section() {
   if (
     !(
       Spicetify.Platform &&
@@ -8,7 +8,7 @@
       Spicetify.Platform.History
     )
   ) {
-    setTimeout(catppuccin, 100);
+    setTimeout(load_colorscheme_section, 100);
     return;
   }
 
@@ -33,9 +33,8 @@
 
   // Create our own section matching spotifys style and structure
   const Section = Spicetify.React.memo(() => {
-    const colorScheme = Spicetify.Config.color_scheme || "frappe";
     const initialValue =
-      localStorage.getItem("catppuccin-accentColor") ?? "none";
+      localStorage.getItem("evergarden-accentColor") ?? "none";
     const [selectedValue, setSelectedValue] =
       Spicetify.React.useState(initialValue);
 
@@ -44,11 +43,6 @@
       const properties = {
         "--spice-text": `var(--spice-${selectedValue})`,
         "--spice-button-active": `var(--spice-${selectedValue})`,
-        "--spice-equalizer": document.querySelector(
-          "body > script.marketplaceScript"
-        )
-          ? `url('https://github.com/catppuccin/spicetify/blob/main/catppuccin/assets/${colorScheme}/equalizer-animated-${accent}.gif?raw=true')`
-          : `url('${colorScheme}/equalizer-animated-${accent}.gif')`,
       };
 
       Object.entries(properties).forEach(([property, value]) => {
@@ -60,7 +54,7 @@
       });
 
       if (initialValue !== selectedValue) {
-        localStorage.setItem("catppuccin-accentColor", selectedValue);
+        localStorage.setItem("evergarden-accentColor", selectedValue);
       }
     }, [selectedValue]);
 
@@ -75,7 +69,7 @@
             className:
               "TextElement-bodyMediumBold-textBase-text encore-text-body-medium-bold",
           },
-          "Catppuccin"
+          "Evergarden"
         ),
         Spicetify.React.createElement("div", { className: "x-settings-row" }, [
           Spicetify.React.createElement(
